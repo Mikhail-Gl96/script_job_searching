@@ -6,22 +6,26 @@
 
 ## Настройка для использования на личном ПК
 1. Скачайте проект с гитхаба
-2. Перейдите в папку с Скрипт с помощью консоли и команды `cd <путь до проекта>`<br>
+2. Перейдите в папку с скриптом при помощи консоли и команды ```cd <путь до проекта>```<br>
 3. Установить зависимости из файла `requirements.txt`<br>
    Библиотеки к установке: `requests`, `terminaltables`, `python-dotenv`.<br>
    
    Возможные команды для установки:<br>
-   `pip3 install -r requirements.txt`<br>
-   `python -m pip install -r requirements.txt`<br>
-   `python3.6 -m pip install -r requirements.txt`
+   ```
+   pip3 install -r requirements.txt
+   python -m pip install -r requirements.txt
+   python3.6 -m pip install -r requirements.txt
+   ```
 4. Создайте файл .env
 5. Запишите в файл .env переменную:
     `SUPERJOB_SECRET_KEY=ваш_секретный_кдюч_от_SUPERJOB_аккаунта`<br>
 6. Запустите Скрипт<br>
    Возможные команды для запуска(из консоли, из папки с скриптом):<br>
-   `python3 main.py`<br>
-   `python main.py`<br>
-   `python3.6 main.py`<br>
+   ```
+   python3 main.py
+   python main.py
+   python3.6 main.py
+   ```
 
 
 ### Цель проекта
