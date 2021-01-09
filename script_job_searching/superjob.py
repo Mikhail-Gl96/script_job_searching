@@ -8,7 +8,6 @@ SUPERJOB_BASE_URL = 'https://api.superjob.ru/2.0/'
 
 
 def get_vacancies(text, secret_key, catalogues, city='Москва'):
-    # Создавать списки по умолчанию в аргументах функции - небезопасно
     # catalogues - "Разработка, программирование": 48
     url = f'{SUPERJOB_BASE_URL}vacancies/'
 
