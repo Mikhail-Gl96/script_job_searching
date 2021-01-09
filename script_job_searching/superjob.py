@@ -8,7 +8,6 @@ SUPERJOB_BASE_URL = 'https://api.superjob.ru/2.0/'
 
 
 def get_vacancies(text, secret_key, catalogues, city='Москва'):
-    # catalogues - "Разработка, программирование": 48
     url = f'{SUPERJOB_BASE_URL}vacancies/'
 
     payload = {
@@ -61,6 +60,7 @@ def get_average_rub_salary_sj(vacancy):
 
 
 def get_vacancies_stats_sj(langs, secret_key, catalogues=48, city='Москва'):
+    # catalogues - "Разработка, программирование": 48
     langs_statistic = []
     for lang in langs:
         vacancies, vacancies_amount = get_vacancies(text=f"{lang}", secret_key=secret_key,

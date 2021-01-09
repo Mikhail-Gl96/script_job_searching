@@ -8,8 +8,6 @@ HEADHUNTER_BASE_URL = 'https://api.hh.ru/'
 
 
 def get_vacancies(text, city=1, period=30):
-    # city - 'Moscow': '1'
-    # period - one_month_period: '30'
     url = f'{HEADHUNTER_BASE_URL}vacancies'
 
     payload = {
@@ -59,6 +57,8 @@ def get_average_rub_salary_hh(vacancy):
 
 
 def get_vacancies_stats_hh(langs, city=1, period=30):
+    # city - 'Moscow': '1'
+    # period - one_month_period: '30'
     langs_statistic = []
     for lang in langs:
         vacancies, vacancies_amount = get_vacancies(text=f"программист {lang}", city=city, period=period)
