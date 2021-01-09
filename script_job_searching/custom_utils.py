@@ -12,14 +12,11 @@ def get_average_rub_salary(salary):
         return None
 
     if salary_from and salary_to:
-        predicted_salary = (salary_from + salary_to) / 2
+        return (salary_from + salary_to) / 2
     elif salary_from and not salary_to:
-        predicted_salary = salary_from * 1.2
+        return salary_from * 1.2
     elif not salary_from and salary_to:
-        predicted_salary = salary_to * 0.8
-    else:
-        predicted_salary = None
-    return predicted_salary
+        return salary_to * 0.8
 
 
 def get_vacancies_salary_info(vacancies, average_salary_func):
