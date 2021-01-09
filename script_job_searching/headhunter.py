@@ -1,7 +1,7 @@
 import requests
 
 
-from custom_utils import predict_rub_salary, get_vacancies_salary_info, create_pretty_table
+from custom_utils import get_average_rub_salary, get_vacancies_salary_info
 
 
 HEADHUNTER_BASE_URL = 'https://api.hh.ru/'
@@ -9,16 +9,20 @@ HEADHUNTER_BASE_URL = 'https://api.hh.ru/'
 
 def get_vacancies(text):
     url = f'{HEADHUNTER_BASE_URL}vacancies'
+    one_month_period = '30'
+    city = {
+        'Moscow': '1'
+    }
 
     payload = {
         'text': text,
-        'area': '1',
-        'period': '30'
+        'area': city['Moscow'],
+        'period': one_month_period
     }
 
     page = 0
     pages_number = 1
-    response_items = []
+    vacancies = []
     response = None
 
     while page < pages_number:
@@ -29,14 +33,13 @@ def get_vacancies(text):
         pages_number = page_response.json()['pages']
         page += 1
 
-        response_items.extend(page_response.json()["items"])
+        vacancies.extend(page_response.json()["items"])
         response = page_response.json()
+    vacancies_amount = response['found']
+    return vacancies.copy(), vacancies_amount
 
-    response['items'] = response_items
-    return response
 
-
-def predict_rub_salary_hh(vacancy):
+def get_average_rub_salary_hh(vacancy):
     salary_exists = True if vacancy['salary'] else False
     if salary_exists:
         salary = vacancy['salary']
@@ -44,32 +47,27 @@ def predict_rub_salary_hh(vacancy):
         salary_from = salary['from']
         salary_to = salary['to']
 
-        answer = {
+        salary_info = {
             'currency': salary_currency,
             'from': salary_from,
             'to': salary_to,
             'salary_exists': salary_exists,
         }
     else:
-        answer = {
+        salary_info = {
             'salary_exists': salary_exists,
         }
-    return answer
+    return salary_info
 
 
-def get_info_vacancies_by_lang_from_headhunter(langs):
+def get_vacancies_stats_hh(langs):
     statistic_langs = []
     for lang in langs:
-        temp_response = get_vacancies(text=f"программист {lang}")
-        vacancies_salary_info = get_vacancies_salary_info(items=temp_response['items'],
-                                                          predict_salary_func=predict_rub_salary_hh)
-        vacancies_processed = vacancies_salary_info[0]
-        average_salary = vacancies_salary_info[1]
-
-        statistic_langs.append(tuple([lang, temp_response['found'], vacancies_processed, average_salary]))
-
-    table = create_pretty_table(table_data=statistic_langs, title='HeadHunter Vacancies Moscow')
-    return table
+        vacancies, vacancies_amount = get_vacancies(text=f"программист {lang}")
+        vacancies_processed, average_salary = get_vacancies_salary_info(items=vacancies,
+                                                                        average_salary_func=get_average_rub_salary_hh)
+        statistic_langs.append([lang, vacancies_amount, vacancies_processed, average_salary])
+    return statistic_langs
 
 
 

@@ -1,7 +1,7 @@
 from terminaltables import AsciiTable
 
 
-def predict_rub_salary(salary):
+def get_average_rub_salary(salary):
     if not salary['salary_exists']:
         return None
 
@@ -18,24 +18,22 @@ def predict_rub_salary(salary):
     elif not salary_from and salary_to:
         predicted_salary = salary_to * 0.8
     else:
-        return None
-
+        predicted_salary = None
     return predicted_salary
 
 
-def get_vacancies_salary_info(items, predict_salary_func):
+def get_vacancies_salary_info(items, average_salary_func):
     salaries = []
     for i in items:
-        temp_salary = predict_rub_salary(predict_salary_func(i))
+        temp_salary = get_average_rub_salary(average_salary_func(i))
         if temp_salary:
             salaries.append(temp_salary)
     vacancies_processed = len(salaries)
     if not vacancies_processed:
-        answer = [vacancies_processed, None]
+        salary = None
     else:
         salary = int(sum(salaries) / vacancies_processed)
-        answer = [vacancies_processed, salary]
-    return answer.copy()
+    return vacancies_processed, salary
 
 
 def create_pretty_table(table_data, title):
