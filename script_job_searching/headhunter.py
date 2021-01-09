@@ -61,13 +61,13 @@ def get_average_rub_salary_hh(vacancy):
 
 
 def get_vacancies_stats_hh(langs):
-    statistic_langs = []
+    langs_statistic = []
     for lang in langs:
         vacancies, vacancies_amount = get_vacancies(text=f"программист {lang}")
-        vacancies_processed, average_salary = get_vacancies_salary_info(items=vacancies,
+        vacancies_processed, average_salary = get_vacancies_salary_info(vacancies=vacancies,
                                                                         average_salary_func=get_average_rub_salary_hh)
-        statistic_langs.append([lang, vacancies_amount, vacancies_processed, average_salary])
-    return statistic_langs
+        langs_statistic.append([lang, vacancies_amount, vacancies_processed, average_salary])
+    return langs_statistic
 
 
 

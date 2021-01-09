@@ -67,13 +67,13 @@ def get_average_rub_salary_sj(vacancy):
 
 
 def get_vacancies_stats_sj(langs, secret_key):
-    statistic_langs = []
+    langs_statistic = []
     for lang in langs:
         vacancies, vacancies_amount = get_vacancies(text=f"{lang}", secret_key=secret_key)
         vacancies_processed, average_salary = \
-            get_vacancies_salary_info(items=vacancies,
+            get_vacancies_salary_info(vacancies=vacancies,
                                       average_salary_func=get_average_rub_salary_sj)
-        statistic_langs.append([lang, vacancies_amount, vacancies_processed, average_salary])
-    return statistic_langs
+        langs_statistic.append([lang, vacancies_amount, vacancies_processed, average_salary])
+    return langs_statistic
 
 

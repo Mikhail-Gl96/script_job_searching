@@ -22,10 +22,10 @@ def get_average_rub_salary(salary):
     return predicted_salary
 
 
-def get_vacancies_salary_info(items, average_salary_func):
+def get_vacancies_salary_info(vacancies, average_salary_func):
     salaries = []
-    for i in items:
-        temp_salary = get_average_rub_salary(average_salary_func(i))
+    for vacancy in vacancies:
+        temp_salary = get_average_rub_salary(average_salary_func(vacancy))
         if temp_salary:
             salaries.append(temp_salary)
     vacancies_processed = len(salaries)
