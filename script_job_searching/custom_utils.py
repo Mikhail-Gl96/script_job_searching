@@ -41,7 +41,7 @@ def get_vacancies_salary_info(items, predict_salary_func):
 def create_pretty_table(table_data, title):
     table = [["Язык программирования", "Вакансий найдено", "Вакансий обработано", "Средняя зарплата"]]
     table.extend(table_data)
-    TABLE_DATA = tuple([i for i in table])
-    table_instance = AsciiTable(TABLE_DATA, title)
+    table_data = [i for i in table]
+    table_instance = AsciiTable(table_data, title)
     table_instance.justify_columns[2] = 'right'
     return table_instance.table

@@ -38,7 +38,7 @@ def get_vacancies(text, secret_key):
     return response
 
 
-def predict_rub_salary_for_SuperJob(vacancy):
+def predict_rub_salary_for_superjob(vacancy):
     salary_currency = vacancy['currency']
     salary_from = vacancy['payment_from']
     salary_to = vacancy['payment_to']
