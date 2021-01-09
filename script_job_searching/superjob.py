@@ -70,6 +70,7 @@ def get_info_vacancies_by_lang_from_superjob(langs, secret_key):
 
         statistic_langs.append(tuple([lang, temp_response['total'], vacancies_processed, average_salary]))
 
-    create_pretty_table(table_data=statistic_langs, title='SuperJob Vacancies Moscow')
+    table = create_pretty_table(table_data=statistic_langs, title='SuperJob Vacancies Moscow')
+    return table
 
 

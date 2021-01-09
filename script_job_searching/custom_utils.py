@@ -45,5 +45,4 @@ def create_pretty_table(table_data, title):
     TABLE_DATA = tuple([i for i in table])
     table_instance = AsciiTable(TABLE_DATA, title)
     table_instance.justify_columns[2] = 'right'
-    print(table_instance.table)
-    print()
+    return table_instance.table

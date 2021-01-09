@@ -68,7 +68,8 @@ def get_info_vacancies_by_lang_from_headhunter(langs):
 
         statistic_langs.append(tuple([lang, temp_response['found'], vacancies_processed, average_salary]))
 
-    create_pretty_table(table_data=statistic_langs, title='HeadHunter Vacancies Moscow')
+    table = create_pretty_table(table_data=statistic_langs, title='HeadHunter Vacancies Moscow')
+    return table
 
 
 

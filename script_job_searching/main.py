@@ -12,8 +12,10 @@ if __name__ == "__main__":
 
     langs = ['JavaScript', 'Java', 'Python', 'Ruby', 'PHP', 'C++', 'C#', 'C', 'Go', 'Swift']
 
-    get_info_vacancies_by_lang_from_headhunter(langs=langs)
-
-    get_info_vacancies_by_lang_from_superjob(langs=langs, secret_key=superjob_secret_key)
-
+    hh_salary_table = get_info_vacancies_by_lang_from_headhunter(langs=langs)
+    print(hh_salary_table)
+    print()
+    sj_salary_table = get_info_vacancies_by_lang_from_superjob(langs=langs, secret_key=superjob_secret_key)
+    print(sj_salary_table)
+    print()
 
