@@ -7,19 +7,14 @@ from custom_utils import get_average_rub_salary, get_vacancies_salary_info
 SUPERJOB_BASE_URL = 'https://api.superjob.ru/2.0/'
 
 
-def get_vacancies(text, secret_key):
+def get_vacancies(text, secret_key, catalogues, city='Москва'):
+    # Создавать списки по умолчанию в аргументах функции - небезопасно
+    # catalogues - "Разработка, программирование": 48
     url = f'{SUPERJOB_BASE_URL}vacancies/'
 
-    professional_fields = {
-        "Разработка, программирование": 48
-    }
-    city = {
-        'Moscow': 'Москва'
-    }
-
     payload = {
-        'catalogues': professional_fields["Разработка, программирование"],
-        'town': city['Moscow'],
+        'catalogues': catalogues,
+        'town': city,
         'keyword': text
     }
     headers = {
@@ -66,10 +61,11 @@ def get_average_rub_salary_sj(vacancy):
     return salary_info
 
 
-def get_vacancies_stats_sj(langs, secret_key):
+def get_vacancies_stats_sj(langs, secret_key, catalogues=48, city='Москва'):
     langs_statistic = []
     for lang in langs:
-        vacancies, vacancies_amount = get_vacancies(text=f"{lang}", secret_key=secret_key)
+        vacancies, vacancies_amount = get_vacancies(text=f"{lang}", secret_key=secret_key,
+                                                    catalogues=catalogues, city=city)
         vacancies_processed, average_salary = \
             get_vacancies_salary_info(vacancies=vacancies,
                                       average_salary_func=get_average_rub_salary_sj)

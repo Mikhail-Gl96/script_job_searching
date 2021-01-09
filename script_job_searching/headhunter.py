@@ -7,17 +7,15 @@ from custom_utils import get_average_rub_salary, get_vacancies_salary_info
 HEADHUNTER_BASE_URL = 'https://api.hh.ru/'
 
 
-def get_vacancies(text):
+def get_vacancies(text, city=1, period=30):
+    # city - 'Moscow': '1'
+    # period - one_month_period: '30'
     url = f'{HEADHUNTER_BASE_URL}vacancies'
-    one_month_period = '30'
-    city = {
-        'Moscow': '1'
-    }
 
     payload = {
         'text': text,
-        'area': city['Moscow'],
-        'period': one_month_period
+        'area': city,
+        'period': period
     }
 
     page = 0
@@ -60,10 +58,10 @@ def get_average_rub_salary_hh(vacancy):
     return salary_info
 
 
-def get_vacancies_stats_hh(langs):
+def get_vacancies_stats_hh(langs, city=1, period=30):
     langs_statistic = []
     for lang in langs:
-        vacancies, vacancies_amount = get_vacancies(text=f"программист {lang}")
+        vacancies, vacancies_amount = get_vacancies(text=f"программист {lang}", city=city, period=period)
         vacancies_processed, average_salary = get_vacancies_salary_info(vacancies=vacancies,
                                                                         average_salary_func=get_average_rub_salary_hh)
         langs_statistic.append([lang, vacancies_amount, vacancies_processed, average_salary])
